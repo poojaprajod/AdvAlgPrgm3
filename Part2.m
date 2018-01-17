@@ -8,7 +8,7 @@ maxW= 70;
 %N values - keep constant for part 1
 minN = 10;
 dN = 10;
-maxN = 10;
+maxN = 70;
 %P values
 minP = 5;
 dP = 1;
@@ -50,9 +50,10 @@ end
 
 time_algo_n = zeros(1, length(N));
 time_solver_n = zeros(1, length(N));
+
 for i = 1:length(N)
-    time_algo_n(i) = mean(reshape(values(i, :, :, :, 1), 1, []));
-    time_solver_n(i) = mean(reshape(values(i, :, :, :, 2), 1, []));
+    time_algo_n(i) = mean(reshape(values(i, 6, 6, :, 1), 1, []));
+    time_solver_n(i) = mean(reshape(values(i, 6, 6, :, 2), 1, []));
 end
 
 time_algo_p = zeros(1,length(p));

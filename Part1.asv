@@ -6,9 +6,9 @@ minW= 10;
 dW = 10;
 maxW= 70;
 %N values - keep constant for part 1
-minN = 30;
+minN = 10;
 dN = 10;
-maxN = 30;
+maxN = 10;
 %P values
 minP = 5;
 dP = 5;
@@ -26,7 +26,7 @@ W = [10 20 40 80 160 320];
 
     
 Inst = 1:maxInst;
-Iter = [25 50 75];
+Iter = [10 20 30];
 
 % 5D matrix in which we store values
 %Number of nodes, probabilities, maxWeight, Iteration, results
@@ -77,10 +77,7 @@ hold on
 plot(W, minValP05(i,:))
 hold off
 end
-title("Lower Bound Goeman-Williamson vs N = 30, Max Weight, p = .5, various T")
-legend("Lower Bound for T = " + Iter)
-xlabel("Max Weight")
-ylabel("Approximation Ratio")
+legend("Lower Bound for p = 0.5, iter = " + Iter, "Lower Bound for p = 1.0, iter = " + Iter)
 
 figure(2)
 for i = 1:length(Iter)
@@ -88,10 +85,7 @@ hold on
 plot(W, minValP1(i,:))
 hold off
 end
-title("Lower Bound Goeman-Williamson vs N = 30, Max Weight, p = 1, various T")
-legend("Lower Bound for T = " + Iter)
 xlabel("Max Weight")
 ylabel("Approximation Ratio")
-
-
+hold off
 
