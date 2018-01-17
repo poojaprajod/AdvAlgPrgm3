@@ -1,9 +1,13 @@
-function cut_val = sdptest(filename)
+function [lower_bound, upper_bound, time] = sdptest(filename)
 ops = sdpsettings('solver','sedumi');
 % read number of nodes
 n = dlmread(filename,'',[0 0 0 0]);
 % read the sparse matrix from graph generator
 X = dlmread(filename,'',1);
+%Graph generator is zero indexed, add 1 to all nodes 
+%to prevent this
+X(:,[1 2]) = X(:,[1 2]) + 1;
+X
 X = [X;n,n,0];
 % convert to a symmetric weight matrix
 W = full(spconvert(X));
@@ -14,10 +18,13 @@ objective = -trace(W*(ones(n,n)-A))/4;
 constraints = [diag(A) == ones(n,1), A >= 0];
 % solve sdp relaxation problem
 sol = solvesdp(constraints, objective, ops);
+time = sol.solvertime;
+
 %double(A);
 % upper bound ?
-double(-objective);
-sol.solvertime
+upper_bound = double(-objective);
+
+%Goemans-Williamson algorithm
 while 1
     % generate random vector with || r || = 1
     r = randn(n,1);
@@ -33,4 +40,8 @@ while 1
     if cut_val >= 0.878*double(-objective)
         break
     end
+end
+
+lower_bound = cut_val;
+
 end
