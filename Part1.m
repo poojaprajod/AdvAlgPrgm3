@@ -80,7 +80,7 @@ end
 title("Lower Bound Goeman-Williamson vs N = 30, Max Weight, p = .5, various T")
 legend("Lower Bound for T = " + Iter)
 xlabel("Max Weight")
-ylabel("Approximation Ratio")
+ylabel("\alpha")
 
 figure(2)
 for i = 1:length(Iter)
@@ -91,7 +91,11 @@ end
 title("Lower Bound Goeman-Williamson vs N = 30, Max Weight, p = 1, various T")
 legend("Lower Bound for T = " + Iter)
 xlabel("Max Weight")
-ylabel("Approximation Ratio")
+ylabel("\alpha")
+
+
+
+
 
 
 
