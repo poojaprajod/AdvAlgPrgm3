@@ -3,8 +3,11 @@ function [lower_bound,time] = Goeman(objective, A, T, n, W)
 lower_bound = inf;
 tic
 
-A = double(A) + eye(n)*0.0001;%Avoid negative values close to zero.
-[B,num] = cholcov(A);
+%A = double(A) + eye(n)*0.0001;%Avoid negative values close to zero.
+%[B,num] = cholcov(A);
+[Q, Y] = eig(value(A));
+B = double(Q * sqrt(Y));
+B = B';
 
 for i = 1:T
     while 1
